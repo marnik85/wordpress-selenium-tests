@@ -7,6 +7,7 @@ import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import org.openqa.selenium.TimeoutException;
 import java.time.Duration;
 
 public class LoginPage {
@@ -63,12 +64,8 @@ public class LoginPage {
     public void logout() {
         WebElement profile = wait.until(ExpectedConditions.visibilityOfElementLocated(profileMenu));
 
-        try {
-            profile.click();
-        } catch (Exception e) {
-            Actions actions = new Actions(driver);
-            actions.moveToElement(profile).perform();
-        }
+        Actions actions = new Actions(driver);
+        actions.moveToElement(profile).perform();
 
         WebElement logout = wait.until(ExpectedConditions.elementToBeClickable(logoutLink));
         logout.click();
@@ -81,5 +78,17 @@ public class LoginPage {
         } catch (Exception e) {
             return false;
         }
+    }
+
+    public String getLoginErrorText() {
+        try {
+            return wait.until(ExpectedConditions.visibilityOfElementLocated(loginError)).getText();
+        } catch (TimeoutException e) {
+            return "";
+        }
+    }
+
+    public String getCurrentUrl() {
+        return driver.getCurrentUrl();
     }
 }

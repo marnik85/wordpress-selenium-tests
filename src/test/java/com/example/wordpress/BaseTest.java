@@ -16,14 +16,19 @@ public class BaseTest {
 
     @BeforeEach
     void setUp() {
-        WebDriverManager.firefoxdriver().setup();
+        String browser = System.getProperty("browser", "firefox").toLowerCase();
 
-        //ChromeOptions options = new ChromeOptions();
-        //options.addArguments("--start-maximized");
+        if ("chrome".equals(browser)) {
+            WebDriverManager.chromedriver().setup();
+            ChromeOptions options = new ChromeOptions();
+            driver = new ChromeDriver(options);
+        } else {
+            WebDriverManager.firefoxdriver().setup();
+            driver = new FirefoxDriver();
+        }
 
-        driver = new FirefoxDriver();
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-        driver.get("http://wordpresstestsite/wp-login.php");
+        driver.get("https://wordpresstestsite/wp-login.php");
     }
 
     @AfterEach
