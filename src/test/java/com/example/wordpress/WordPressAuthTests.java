@@ -11,7 +11,7 @@ import java.util.stream.Stream;
 
 public class WordPressAuthTests extends BaseTest {
 
-    private static final String WORDPRESS_LOGIN_URL = "https://wordpresstestsite/wp-login.php";
+    private static final String WORDPRESS_LOGIN_URL = "http://wordpresstestsite/wp-login.php";
 
     static Stream<UserCredentials> wordpressUsers() {
         return Stream.of(

@@ -28,7 +28,7 @@ public class BaseTest {
         }
 
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
-        driver.get("https://wordpresstestsite/wp-login.php");
+        driver.get("http://wordpresstestsite/wp-login.php");
     }
 
     @AfterEach
