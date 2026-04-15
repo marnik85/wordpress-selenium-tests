@@ -4,6 +4,8 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 import java.time.Duration;
@@ -14,9 +16,17 @@ public class BaseTest {
 
     @BeforeEach
     void setUp() {
-        WebDriverManager.firefoxdriver().setup();
+        String browser = System.getProperty("browser", "firefox").toLowerCase();
 
-        driver = new FirefoxDriver();
+        if ("chrome".equals(browser)) {
+            WebDriverManager.chromedriver().setup();
+            ChromeOptions options = new ChromeOptions();
+            driver = new ChromeDriver(options);
+        } else {
+            WebDriverManager.firefoxdriver().setup();
+            driver = new FirefoxDriver();
+        }
+
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
         driver.get("https://wordpresstestsite/wp-login.php");
     }

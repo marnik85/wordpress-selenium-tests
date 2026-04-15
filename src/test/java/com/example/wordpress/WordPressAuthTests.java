@@ -1,6 +1,7 @@
 package com.example.wordpress;
 
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -54,11 +55,16 @@ public class WordPressAuthTests extends BaseTest {
     @Nested
     class WordPressNegativeTests {
 
+        private LoginPage loginPage;
+
+        @BeforeEach
+        void setUpLoginPage() {
+            loginPage = new LoginPage(driver);
+            loginPage.open(WORDPRESS_LOGIN_URL);
+        }
+
         @Test
         void shouldShowErrorForInvalidLogin() {
-            LoginPage loginPage = new LoginPage(driver);
-
-            loginPage.open(WORDPRESS_LOGIN_URL);
             loginPage.login("wrong_user", "wrong_password");
 
             Assertions.assertTrue(
@@ -69,9 +75,6 @@ public class WordPressAuthTests extends BaseTest {
 
         @Test
         void shouldShowErrorForEmptyCredentials() {
-            LoginPage loginPage = new LoginPage(driver);
-
-            loginPage.open(WORDPRESS_LOGIN_URL);
             loginPage.login("", "");
 
             Assertions.assertTrue(
@@ -82,9 +85,6 @@ public class WordPressAuthTests extends BaseTest {
 
         @Test
         void shouldShowErrorForEmptyPassword() {
-            LoginPage loginPage = new LoginPage(driver);
-
-            loginPage.open(WORDPRESS_LOGIN_URL);
             loginPage.login("admin", "");
 
             Assertions.assertTrue(
@@ -95,9 +95,6 @@ public class WordPressAuthTests extends BaseTest {
 
         @Test
         void shouldShowErrorForEmptyUsername() {
-            LoginPage loginPage = new LoginPage(driver);
-
-            loginPage.open(WORDPRESS_LOGIN_URL);
             loginPage.login("", "12345");
 
             Assertions.assertTrue(
@@ -108,9 +105,6 @@ public class WordPressAuthTests extends BaseTest {
 
         @Test
         void shouldShowErrorForWrongPasswordWithValidUser() {
-            LoginPage loginPage = new LoginPage(driver);
-
-            loginPage.open(WORDPRESS_LOGIN_URL);
             loginPage.login("admin", "wrong_password");
 
             Assertions.assertTrue(
@@ -125,9 +119,6 @@ public class WordPressAuthTests extends BaseTest {
 
         @Test
         void shouldShowErrorForNonExistentUser() {
-            LoginPage loginPage = new LoginPage(driver);
-
-            loginPage.open(WORDPRESS_LOGIN_URL);
             loginPage.login("nonexistent_user_xyz", "12345");
 
             Assertions.assertTrue(
@@ -138,9 +129,6 @@ public class WordPressAuthTests extends BaseTest {
 
         @Test
         void shouldContainErrorTextForInvalidCredentials() {
-            LoginPage loginPage = new LoginPage(driver);
-
-            loginPage.open(WORDPRESS_LOGIN_URL);
             loginPage.login("wrong_user", "wrong_password");
 
             String errorText = loginPage.getLoginErrorText();
@@ -152,9 +140,6 @@ public class WordPressAuthTests extends BaseTest {
 
         @Test
         void shouldRemainOnLoginPageAfterFailedLogin() {
-            LoginPage loginPage = new LoginPage(driver);
-
-            loginPage.open(WORDPRESS_LOGIN_URL);
             loginPage.login("wrong_user", "wrong_password");
 
             String currentUrl = loginPage.getCurrentUrl();
