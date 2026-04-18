@@ -30,10 +30,10 @@ public class SeleniumHelloWorld {
         driver.get(baseUrl+"/wp-login.php");
     }
 
-    /*@AfterEach
+    @AfterEach
     public void tearDown(){
         driver.quit();
-    }*/
+    }
 
 
     @Test
