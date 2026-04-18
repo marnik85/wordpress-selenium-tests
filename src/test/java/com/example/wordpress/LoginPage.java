@@ -97,6 +97,7 @@ public class LoginPage {
             String passwordMsg = (String) js.executeScript("return arguments[0].validationMessage;", password);
             return (usernameMsg != null && !usernameMsg.isEmpty()) || (passwordMsg != null && !passwordMsg.isEmpty());
         } catch (Exception e) {
+            System.err.println("isBrowserValidationDisplayed failed: " + e.getMessage());
             return false;
         }
     }
