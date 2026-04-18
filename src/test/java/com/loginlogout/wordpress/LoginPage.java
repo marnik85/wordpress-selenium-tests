@@ -1,4 +1,4 @@
-package com.example.wordpress;
+package com.loginlogout.wordpress;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;

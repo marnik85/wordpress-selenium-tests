@@ -1,4 +1,4 @@
-package com.example.wordpress;
+package com.loginlogout.wordpress;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -18,9 +18,9 @@ public class WordPressAuthTests extends BaseTest {
                 new UserCredentials("sub1", "12345"),
                 new UserCredentials("sub2", "12345"),
                 new UserCredentials("sub3", "12345"),
-                new UserCredentials("editor1", "12345"),
                 new UserCredentials("contributor1", "12345"),
                 new UserCredentials("author1", "12345"),
+                new UserCredentials("editor1", "12345"),
                 new UserCredentials("admin", "12345")
         );
     }

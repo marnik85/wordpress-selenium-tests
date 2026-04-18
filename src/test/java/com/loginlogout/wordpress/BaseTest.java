@@ -1,4 +1,4 @@
-package com.example.wordpress;
+package com.loginlogout.wordpress;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.AfterEach;
