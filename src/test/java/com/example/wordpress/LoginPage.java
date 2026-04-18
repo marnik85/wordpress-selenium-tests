@@ -21,7 +21,6 @@ public class LoginPage {
     private final By dashboardMarker = By.id("wpadminbar");
     private final By profileMenu = By.id("wp-admin-bar-my-account");
     private final By logoutLink = By.xpath("//a[contains(@href, 'wp-login.php?action=logout')]");
-    private final By loggedOutMessage = By.cssSelector("p.message");
     private final By loginError = By.id("login_error");
 
     public LoginPage(WebDriver driver) {
@@ -73,8 +72,8 @@ public class LoginPage {
 
     public boolean isLoggedOut() {
         try {
-            WebElement message = wait.until(ExpectedConditions.visibilityOfElementLocated(loggedOutMessage));
-            return message.getText().toLowerCase().contains("logged out");
+            wait.until(ExpectedConditions.urlContains("wp-login.php?loggedout"));
+            return driver.getCurrentUrl().contains("wp-login.php?loggedout");
         } catch (Exception e) {
             return false;
         }
