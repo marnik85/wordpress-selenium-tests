@@ -78,8 +78,8 @@ public class WordPressAuthTests extends BaseTest {
             loginPage.login("", "");
 
             Assertions.assertTrue(
-                    loginPage.isLoginErrorDisplayed(),
-                    "Expected a login error to be displayed when both fields are empty"
+                    loginPage.isBrowserValidationDisplayed(),
+                    "Expected a browser validation popup to be displayed when both fields are empty"
             );
         }
 
@@ -88,8 +88,8 @@ public class WordPressAuthTests extends BaseTest {
             loginPage.login("admin", "");
 
             Assertions.assertTrue(
-                    loginPage.isLoginErrorDisplayed(),
-                    "Expected a login error to be displayed when password is empty"
+                    loginPage.isBrowserValidationDisplayed(),
+                    "Expected a browser validation popup to be displayed when password is empty"
             );
         }
 
@@ -98,8 +98,8 @@ public class WordPressAuthTests extends BaseTest {
             loginPage.login("", "12345");
 
             Assertions.assertTrue(
-                    loginPage.isLoginErrorDisplayed(),
-                    "Expected a login error to be displayed when username is empty"
+                    loginPage.isBrowserValidationDisplayed(),
+                    "Expected a browser validation popup to be displayed when username is empty"
             );
         }
 

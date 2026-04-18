@@ -1,6 +1,7 @@
 package com.example.wordpress;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -84,6 +85,20 @@ public class LoginPage {
             return wait.until(ExpectedConditions.visibilityOfElementLocated(loginError)).getText();
         } catch (TimeoutException e) {
             return "";
+        }
+    }
+
+    public boolean isBrowserValidationDisplayed() {
+        try {
+            JavascriptExecutor js = (JavascriptExecutor) driver;
+            WebElement username = driver.findElement(usernameField);
+            WebElement password = driver.findElement(passwordField);
+            String usernameMsg = (String) js.executeScript("return arguments[0].validationMessage;", username);
+            String passwordMsg = (String) js.executeScript("return arguments[0].validationMessage;", password);
+            return (usernameMsg != null && !usernameMsg.isEmpty()) || (passwordMsg != null && !passwordMsg.isEmpty());
+        } catch (Exception e) {
+            System.err.println("isBrowserValidationDisplayed failed: " + e.getMessage());
+            return false;
         }
     }
 
